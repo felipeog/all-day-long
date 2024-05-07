@@ -1,0 +1,89 @@
+html {
+  background-color: #3b7cf3;
+  overflow: hidden;
+}
+
+.wrapper {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective-origin: center;
+}
+
+.container {
+  transform-style: preserve-3d;
+  transform: rotateY(20deg) rotateX(50deg) rotateZ(-20deg);
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.fragment-wrapper {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: rotateX(50deg);
+  animation-name: fragment;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: reverse;
+}
+
+.fragment {
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 400px;
+  height: 20px;
+  transform: translateZ(100px);
+  background-image: url("https://i.postimg.cc/jS1CZwGJ/all-day-long-front.png");
+  background-size: 100% auto;
+  backface-visibility: hidden;
+}
+
+.fragment::after {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 20px;
+  transform: rotateY(180deg);
+  background-image: url("https://i.postimg.cc/B6BS9Xwp/all-day-long-back.png");
+  background-size: 100% auto;
+  backface-visibility: hidden;
+}
+
+@for $i from 0 through 79 {
+  .fragment-wrapper:nth-child(#{$i + 1}) {
+    animation-delay: #{-$i * 75}ms;
+
+    .fragment,
+    .fragment::after {
+      background-position-y: #{$i * 20}px;
+    }
+  }
+}
+
+@keyframes fragment {
+  0% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+
+  25% {
+    transform: translateY(400px) rotateX(0deg);
+  }
+
+  47% {
+    transform: translateY(400px) rotateX(-180deg);
+  }
+
+  77% {
+    transform: translateY(0px) rotateX(-180deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotateX(-360deg);
+  }
+}
