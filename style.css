@@ -1,0 +1,65 @@
+html {
+  background-color: #3b7cf3;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+input,
+button {
+  font-family: sans-serif;
+}
+
+.wrapper {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+}
+
+.container {
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.fragment-wrapper {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.fragment {
+  position: absolute;
+  transform-style: preserve-3d;
+  background-image: url("https://i.postimg.cc/jS1CZwGJ/all-day-long-front.png");
+  background-size: 100% auto;
+  backface-visibility: hidden;
+}
+
+.fragment::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+  background-image: url("https://i.postimg.cc/B6BS9Xwp/all-day-long-back.png");
+  width: inherit;
+  height: inherit;
+  background-position-y: inherit;
+  background-size: inherit;
+  backface-visibility: inherit;
+}
+
+.settings {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+}
+
+.controls {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
